@@ -20,7 +20,7 @@ export const createTask = async (req, res, next) => {
 };
 
 // Get all tasks
-export const getTasks = async (req, res) => {
+export const getTasks = async (req, res, next) => {
   try {
     const userId = req.user._id;
     const { status, category, priority } = req.query;
@@ -39,7 +39,7 @@ export const getTasks = async (req, res) => {
 };
 
 // Get single task
-export const getTaskById = async (req, res) => {
+export const getTaskById = async (req, res, next) => {
   try {
     const task = await Task.findById(req.params.id);
     if (!task) return res.status(404).json({ error: "Task not found" });
@@ -50,7 +50,7 @@ export const getTaskById = async (req, res) => {
 };
 
 // Update task
-export const updateTask = async (req, res) => {
+export const updateTask = async (req, res, next) => {
   try {
     const userId = req.user._id;
     const updated = await Task.findByIdAndUpdate(
@@ -67,7 +67,7 @@ export const updateTask = async (req, res) => {
 };
 
 // Delete task
-export const deleteTask = async (req, res) => {
+export const deleteTask = async (req, res, next) => {
   try {
     const userId = req.user._id;
     await Task.findByIdAndDelete({ _id: req.params.id, user: userId });

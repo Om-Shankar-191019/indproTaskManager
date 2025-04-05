@@ -19,7 +19,13 @@ const __dirname = path.resolve();
 // middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: true, // your frontend
+    credentials: true, // allow sending cookies
+  })
+);
 
 // routes
 app.use("/api/auth", authRoutes);

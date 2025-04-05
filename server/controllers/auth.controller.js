@@ -59,8 +59,8 @@ export const login = async (req, res, next) => {
     }
 
     const tokenExpirationDate = generateToken(user._id, res);
-    const token = req.cookies.jwt;
-    console.log("token auth : ", token);
+    // const token = req.cookies.jwt;
+    // console.log("token auth : ", token);
     res.status(200).json({
       _id: user._id,
       username: user.username,

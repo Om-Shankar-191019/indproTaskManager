@@ -14,7 +14,7 @@ const protectRoute = async (req, res, next) => {
     }
 
     const user = await User.findById(decode.userId).select("-password");
-
+    // console.log(user);
     req.user = user;
     next();
   } catch (error) {
