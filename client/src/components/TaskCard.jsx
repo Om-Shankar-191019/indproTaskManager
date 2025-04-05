@@ -1,16 +1,12 @@
 import { FaTrash, FaEdit, FaCheckCircle, FaClock } from "react-icons/fa";
+import { formatDate } from "../utils/utilities";
 
 const TaskCard = ({ task }) => {
-  const {
-    title,
-    description,
-    dueTime,
-    priority,
-    status,
-    categories,
-    onDelete,
-    onUpdate,
-  } = task;
+  const { title, description, dueTime, priority, status, category, updatedAt } =
+    task;
+
+  const onDelete = () => {};
+  const onUpdate = () => {};
 
   const priorityColor = {
     low: "bg-green-100 text-green-700",
@@ -21,27 +17,18 @@ const TaskCard = ({ task }) => {
   return (
     <div className="bg-white rounded-2xl shadow-lg p-5 w-full max-w-md mx-auto mb-4 transition-all hover:shadow-xl">
       {/* Title */}
-      <h2 className="text-xl font-semibold text-gray-800 mb-2">{title}</h2>
+      <h2 className="text-base font-semibold text-gray-800 mb-2 ">{title}</h2>
 
       {/* Description */}
-      <p className="text-gray-600 mb-4">{description}</p>
+      <p className="text-gray-600 mb-4 text-xs">{description}</p>
 
       {/* Bottom Info Row */}
       <div className="flex justify-between items-center mb-3 flex-wrap gap-2">
         {/* Due Time */}
         <div className="flex items-center text-sm text-gray-500">
           <FaClock className="mr-1" />
-          <span>{dueTime}</span>
+          <span>{formatDate(updatedAt)}</span>
         </div>
-
-        {/* Priority */}
-        <span
-          className={`text-xs font-medium px-2 py-1 rounded-full ${
-            priorityColor[priority.toLowerCase()]
-          }`}
-        >
-          {priority}
-        </span>
 
         {/* Icons */}
         <div className="flex items-center gap-3 text-gray-500">
@@ -68,16 +55,19 @@ const TaskCard = ({ task }) => {
           {status}
         </div>
 
+        {/* Priority */}
+        <span
+          className={`text-xs font-medium px-2 py-1 rounded-full ${
+            priorityColor[priority.toLowerCase()]
+          }`}
+        >
+          {priority}
+        </span>
         {/* Category Chips */}
         <div className="flex flex-wrap gap-1">
-          {categories.map((cat, index) => (
-            <span
-              key={index}
-              className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full"
-            >
-              {cat}
-            </span>
-          ))}
+          <span className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full">
+            {category}
+          </span>
         </div>
       </div>
     </div>

@@ -120,9 +120,9 @@ const Header = () => {
                 Summary
               </NavLink>
             </div>
-            <div className="flex  items-center justify-between gap-10">
+            <div className="flex  items-center justify-between gap-10 ">
               <div
-                className="flex gap-2 items-center  border-sky-600 px-2 py-1 bg-primary cursor-pointer rounded-md"
+                className="flex gap-2 items-center  border-sky-600 px-2 py-1  cursor-pointer rounded-md border-2"
                 onClick={handleLogout}
               >
                 <span>Log out</span>
