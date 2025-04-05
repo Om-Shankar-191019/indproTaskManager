@@ -5,6 +5,9 @@ import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./context/AuthContext";
+import View from "./pages/View";
+import Summary from "./pages/Summary";
+import HomeLayout from "./pages/HomeLayout";
 
 const App = () => {
   const { authUser } = useAuthContext();
@@ -22,23 +25,33 @@ const App = () => {
     <>
       <Routes>
         <Route
-          path="/"
-          element={
-            authUser && tokenExpiryExist ? <Home /> : <Navigate to="/login" />
-          }
-        />
-        <Route
           path="/login"
           element={
             authUser && tokenExpiryExist ? <Navigate to="/" /> : <Login />
           }
         />
+
         <Route
           path="/signup"
           element={
             authUser && tokenExpiryExist ? <Navigate to="/" /> : <Signup />
           }
         />
+
+        <Route
+          path="/"
+          element={
+            authUser && tokenExpiryExist ? (
+              <HomeLayout />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        >
+          <Route index element={<Home />} />
+          <Route path="view" element={<View />} />
+          <Route path="summary" element={<Summary />} />
+        </Route>
       </Routes>
       <Toaster />
     </>
