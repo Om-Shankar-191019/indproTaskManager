@@ -10,6 +10,7 @@ import path from "path";
 import authRoutes from "./server/routes/auth.routes.js";
 import errorHandler from "./server/middleware/errorHandler.js";
 import protectRoute from "./server/middleware/protectRoute.js";
+import taskRoutes from "./server/routes/task.routes.js";
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -22,6 +23,7 @@ app.use(cors());
 
 // routes
 app.use("/api/auth", authRoutes);
+app.use("/api/task", protectRoute, taskRoutes);
 app.get("/api/test", protectRoute, (req, res) => {
   res.json({ msg: req.user });
 });
