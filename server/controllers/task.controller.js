@@ -23,7 +23,15 @@ export const createTask = async (req, res, next) => {
 export const getTasks = async (req, res) => {
   try {
     const userId = req.user._id;
-    const tasks = await Task.find({ user: userId }).sort({ createdAt: -1 });
+    const { status, category, priority } = req.query;
+    const query = { user: userId };
+
+    if (status) query.status = status;
+    if (category) query.category = category;
+    if (priority) query.priority = priority;
+
+    const tasks = await Task.find(query).sort({ createdAt: -1 });
+
     res.status(200).json(tasks);
   } catch (error) {
     next(error);
