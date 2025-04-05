@@ -27,6 +27,11 @@ const taskSchema = new mongoose.Schema(
       ],
       default: "Others",
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", // 🔗 Reference to User collection
+      required: true,
+    },
   },
   { timestamps: true }
 );
