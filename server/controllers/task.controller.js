@@ -3,8 +3,16 @@ import Task from "../models/task.model.js";
 // Create a task
 export const createTask = async (req, res, next) => {
   try {
-    const task = new Task(req.body);
-    const saved = await task.save();
+    const userId = req.user._id;
+    const newTask = new Task({
+      title: req.body.title,
+      description: req.body.description,
+      dueDate: req.body.dueDate,
+      priority: req.body.priority,
+      category: req.body.category,
+      user: userId,
+    });
+    const saved = await newTask.save();
     res.status(201).json(saved);
   } catch (error) {
     next(error);
@@ -14,7 +22,8 @@ export const createTask = async (req, res, next) => {
 // Get all tasks
 export const getTasks = async (req, res) => {
   try {
-    const tasks = await Task.find().sort({ createdAt: -1 });
+    const userId = req.user._id;
+    const tasks = await Task.find({ user: userId }).sort({ createdAt: -1 });
     res.status(200).json(tasks);
   } catch (error) {
     next(error);
@@ -35,9 +44,14 @@ export const getTaskById = async (req, res) => {
 // Update task
 export const updateTask = async (req, res) => {
   try {
-    const updated = await Task.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
+    const userId = req.user._id;
+    const updated = await Task.findByIdAndUpdate(
+      { _id: req.params.id, user: userId },
+      req.body,
+      {
+        new: true,
+      }
+    );
     res.status(200).json(updated);
   } catch (error) {
     next(error);
@@ -47,8 +61,9 @@ export const updateTask = async (req, res) => {
 // Delete task
 export const deleteTask = async (req, res) => {
   try {
-    await Task.findByIdAndDelete(req.params.id);
-    res.status(204).end();
+    const userId = req.user._id;
+    await Task.findByIdAndDelete({ _id: req.params.id, user: userId });
+    res.status(204).json({ message: "Task deleted" });
   } catch (error) {
     next(error);
   }
