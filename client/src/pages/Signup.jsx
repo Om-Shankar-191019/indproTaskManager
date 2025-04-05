@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useSignup from "../hooks/useSignup";
 import { SiTask } from "react-icons/si";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 
 const Signup = () => {
   const { loading, signup } = useSignup();
@@ -21,6 +21,7 @@ const Signup = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log(userInput);
     await signup(userInput);
   };
   return (
