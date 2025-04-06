@@ -4,6 +4,7 @@ import TaskCard from "../components/TaskCard";
 import toast from "react-hot-toast";
 import useFetchFilteredTasks from "../hooks/useFetchFilteredTasks";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useDebounce from "../hooks/useDebounce";
 
 const categories = [
   "Work",
@@ -26,12 +27,16 @@ const View = () => {
     status: "",
     priority: "",
     category: "",
+    title: "",
   });
+
+  const [searchTitle, setSearchTitle] = useState("");
+  const debouncedTitle = useDebounce(searchTitle, 500);
   const { loading, fetchFilteredTasks } = useFetchFilteredTasks();
 
   useEffect(() => {
-    fetchFilteredTasks(filters);
-  }, [filters]);
+    fetchFilteredTasks({ ...filters, title: debouncedTitle });
+  }, [filters, debouncedTitle]);
 
   const handleFilterChange = (type, value) => {
     setFilters((prev) => ({
@@ -44,6 +49,16 @@ const View = () => {
     <div className="p-4 max-w-7xl mx-auto">
       {/* Filters */}
       <div className="flex flex-wrap gap-4 mb-6 justify-start items-center">
+        {/* search bar */}
+        <div className="mb-6 mt-2 flex justify-between items-center flex-wrap gap-4">
+          <input
+            type="text"
+            placeholder="Search by title..."
+            className="border border-gray-300 bg-white rounded px-4 py-2 w-full sm:w-72 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={searchTitle}
+            onChange={(e) => setSearchTitle(e.target.value)}
+          />
+        </div>
         {/* Status Filter */}
         <div className="space-x-2">
           <span className="text-gray-600 font-semibold">Status:</span>
