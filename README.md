@@ -6,7 +6,7 @@ A modern and user-friendly Task Manager built using the MERN Stack (MongoDB, Exp
 🔗 Live Demo
 https://indprotaskmanager.onrender.com
 
-For testing purpose :
+# For testing purpose :
 username : testuser
 email : testuser@xyz.com
 password : testuser@xyz
@@ -26,7 +26,7 @@ password : testuser@xyz
 
 🎨 Responsive Design using Tailwind CSS
 
-📁 Folder Structure (Clean & Scalable)
+# Folder Structure (Clean & Scalable)
 
 📦root
 ┣ 📂client # React Frontend
@@ -84,7 +84,7 @@ npm run dev
 
 Your app should now be running at http://localhost:5173
 
-For testing purpose :
+# For testing purpose :
 username : testuser
 email : testuser@xyz.com
 password : testuser@xyz
