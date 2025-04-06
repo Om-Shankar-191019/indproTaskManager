@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useTaskContext } from "../context/TaskContext";
 import TaskCard from "../components/TaskCard";
 import toast from "react-hot-toast";
+import useFetchFilteredTasks from "../hooks/useFetchFilteredTasks";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const categories = [
   "Work",
@@ -16,7 +18,7 @@ const categories = [
   "Others",
 ];
 const priorities = ["Low", "Medium", "High"];
-const statuses = ["Pending", "Completed"];
+const statuses = ["pending", "completed"];
 
 const View = () => {
   const { tasks, setTasks } = useTaskContext();
@@ -25,12 +27,10 @@ const View = () => {
     priority: "",
     category: "",
   });
-
-  console.log(filters);
-  const fetchFilteredTasks = async () => {};
+  const { loading, fetchFilteredTasks } = useFetchFilteredTasks();
 
   useEffect(() => {
-    fetchFilteredTasks();
+    fetchFilteredTasks(filters);
   }, [filters]);
 
   const handleFilterChange = (type, value) => {
@@ -107,7 +107,9 @@ const View = () => {
 
       {/* Task Cards */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {tasks?.length > 0 ? (
+        {loading ? (
+          <LoadingSpinner />
+        ) : tasks?.length > 0 ? (
           tasks.map((task) => <TaskCard key={task._id} task={task} />)
         ) : (
           <p className="text-gray-500">No tasks found.</p>
