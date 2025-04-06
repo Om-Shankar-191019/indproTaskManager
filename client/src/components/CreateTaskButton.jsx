@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { PiPencilSimpleFill } from "react-icons/pi";
+import useCreateTask from "../hooks/useCreateTask";
 
-const CreateTaskButton = ({ onCreate }) => {
+const CreateTaskButton = () => {
   const [open, setOpen] = useState(false);
+  const { loading, createTask } = useCreateTask();
   const [taskData, setTaskData] = useState({
     title: "",
     description: "",
-    dueTime: "",
     priority: "Low",
     status: "pending",
-    categories: "",
+    category: "Others",
   });
 
   const handleChange = (e) => {
@@ -18,18 +19,16 @@ const CreateTaskButton = ({ onCreate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onCreate({
-      ...taskData,
-      categories: taskData.categories.split(",").map((c) => c.trim()),
-    });
+
+    createTask(taskData);
+
     setOpen(false);
     setTaskData({
       title: "",
       description: "",
-      dueTime: "",
-      priority: "Low",
-      status: "pending",
-      categories: "",
+      priority: "",
+      status: "",
+      category: "",
     });
   };
 
@@ -45,11 +44,11 @@ const CreateTaskButton = ({ onCreate }) => {
 
       {/* Modal */}
       {open && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/30 backdrop-blur-sm  flex items-center justify-center z-50">
           <div className="bg-white rounded-xl shadow-lg w-full max-w-md p-6 relative">
             <button
               onClick={() => setOpen(false)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-black"
+              className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-black"
             >
               ✕
             </button>
@@ -69,25 +68,17 @@ const CreateTaskButton = ({ onCreate }) => {
                 className="w-full border p-2 rounded"
                 value={taskData.description}
                 onChange={handleChange}
-                required
               />
-              <input
-                type="datetime-local"
-                name="dueTime"
-                className="w-full border p-2 rounded"
-                value={taskData.dueTime}
-                onChange={handleChange}
-                required
-              />
+
               <select
                 name="priority"
                 className="w-full border p-2 rounded"
                 value={taskData.priority}
                 onChange={handleChange}
               >
-                <option>Low</option>
-                <option>Medium</option>
-                <option>High</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
               </select>
               <select
                 name="status"
@@ -98,16 +89,26 @@ const CreateTaskButton = ({ onCreate }) => {
                 <option value="pending">Pending</option>
                 <option value="completed">Completed</option>
               </select>
-              <input
-                name="categories"
-                placeholder="Categories (comma separated)"
+              <select
+                name="category"
                 className="w-full border p-2 rounded"
-                value={taskData.categories}
+                value={taskData.category}
                 onChange={handleChange}
-              />
+              >
+                <option value="Others">Others</option>
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Health">Health</option>
+                <option value="Finance">Finance</option>
+                <option value="Education">Education</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Chores">Chores</option>
+                <option value="Meetings">Meetings</option>
+                <option value="Travel">Travel</option>
+              </select>
               <button
                 type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white p-2 rounded"
+                className="w-full cursor-pointer bg-blue-600  hover:bg-blue-500 text-white p-2 rounded"
               >
                 Create Task
               </button>

@@ -10,7 +10,7 @@ const errorHandler = async (err, req, res, next) => {
   }
 
   return res.status(statusCode).json({ error });
-  //   return res.status(400).json({ msg: err });
+  // return res.status(400).json({ msg: err });
 };
 
 export default errorHandler;

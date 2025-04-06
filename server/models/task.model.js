@@ -9,7 +9,7 @@ const taskSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ["pending", "completed"],
-      default: "pending",
+      default: "Pending",
     },
     category: {
       type: String,
@@ -29,7 +29,7 @@ const taskSchema = new mongoose.Schema(
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User", // 🔗 Reference to User collection
+      ref: "User",
       required: true,
     },
   },

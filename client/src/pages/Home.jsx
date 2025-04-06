@@ -7,7 +7,7 @@ import useFetchTasks from "../hooks/useFetchTasks";
 const Home = () => {
   const { loading, fetchTasks } = useFetchTasks();
   const { allTasks } = useTaskContext();
-  console.log("all tasks:", allTasks);
+  // console.log("all tasks:", allTasks);
 
   useEffect(() => {
     fetchTasks();
@@ -20,7 +20,7 @@ const Home = () => {
             <TaskCard key={`eachTask - ${index}`} task={task} />
           ))}
       </div>
-      {/* <CreateTaskButton /> */}
+      <CreateTaskButton />
     </section>
   );
 };

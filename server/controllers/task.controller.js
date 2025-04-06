@@ -7,7 +7,7 @@ export const createTask = async (req, res, next) => {
     const newTask = new Task({
       title: req.body.title,
       description: req.body.description,
-      dueDate: req.body.dueDate,
+      status: req.body.status,
       priority: req.body.priority,
       category: req.body.category,
       user: userId,

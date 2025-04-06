@@ -2,15 +2,19 @@ import React, { useState } from "react";
 import { useTaskContext } from "../context/TaskContext";
 import toast from "react-hot-toast";
 
-const useFetchTasks = () => {
+const useCreateTask = () => {
   const [loading, setLoading] = useState(false);
   const { setTasks, setAllTasks } = useTaskContext();
 
-  const fetchTasks = async () => {
+  const createTask = async (taskData) => {
     setLoading(true);
     try {
       const res = await fetch(`/api/task`, {
-        method: "GET",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(taskData),
         credentials: "include",
       });
       const data = await res.json();
@@ -18,19 +22,18 @@ const useFetchTasks = () => {
         // console.log("data err: ", data.error);
         throw new Error(data.error);
       }
-      // console.log(data);
 
-      setAllTasks(data);
-      setTasks(data);
+      setAllTasks((prev) => [data, ...prev]);
+      setTasks((prev) => [data, ...prev]);
     } catch (error) {
       toast.error(error.message);
-      console.log(error);
+      //   console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
-  return { loading, fetchTasks };
+  return { loading, createTask };
 };
 
-export default useFetchTasks;
+export default useCreateTask;
