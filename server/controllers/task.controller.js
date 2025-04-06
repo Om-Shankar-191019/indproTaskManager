@@ -30,7 +30,7 @@ export const getTasks = async (req, res, next) => {
     if (category) query.category = category;
     if (priority) query.priority = priority;
 
-    const tasks = await Task.find(query).sort({ createdAt: -1 });
+    const tasks = await Task.find(query).sort({ updatedAt: -1 });
 
     res.status(200).json(tasks);
   } catch (error) {

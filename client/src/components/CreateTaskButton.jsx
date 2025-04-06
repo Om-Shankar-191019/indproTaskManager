@@ -6,32 +6,6 @@ import CreateUpdateModal from "./CreateUpdateModal";
 const CreateTaskButton = () => {
   const [open, setOpen] = useState(false);
   const { loading, createTask } = useCreateTask();
-  // const [taskData, setTaskData] = useState({
-  //   title: "",
-  //   description: "",
-  //   priority: "Low",
-  //   status: "pending",
-  //   category: "Others",
-  // });
-
-  // const handleChange = (e) => {
-  //   setTaskData({ ...taskData, [e.target.name]: e.target.value });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   createTask(taskData);
-
-  //   setOpen(false);
-  //   setTaskData({
-  //     title: "",
-  //     description: "",
-  //     priority: "Low",
-  //     status: "pending",
-  //     category: "Others",
-  //   });
-  // };
 
   return (
     <>

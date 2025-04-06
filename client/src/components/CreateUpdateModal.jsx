@@ -9,6 +9,7 @@ const CreateUpdateModal = ({
   priority,
   status,
   category,
+  _id,
 }) => {
   const [taskData, setTaskData] = useState({
     title: "",
@@ -19,16 +20,16 @@ const CreateUpdateModal = ({
   });
 
   useEffect(() => {
-    const initialiseData = () => {
-      (taskData.title = title),
-        (taskData.description = description),
-        (taskData.priority = priority),
-        (taskData.status = status),
-        (taskData.category = category);
-    };
-
-    initialiseData();
+    setTaskData({
+      title: title || "",
+      description: description || "",
+      priority: priority || "Low",
+      status: status || "pending",
+      category: category || "Others",
+    });
   }, []);
+
+  //   console.log("ta : ", taskData, _id);
 
   const handleChange = (e) => {
     setTaskData({ ...taskData, [e.target.name]: e.target.value });
@@ -36,7 +37,7 @@ const CreateUpdateModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    modalFunction(taskData);
+    modalFunction(taskData, _id);
     setOpen(false);
     setTaskData({
       title: "",
@@ -63,7 +64,7 @@ const CreateUpdateModal = ({
               name="title"
               placeholder="Title"
               className="w-full border p-2 rounded"
-              value={taskData.title}
+              value={taskData.title || ""}
               onChange={handleChange}
               required
             />
@@ -71,14 +72,14 @@ const CreateUpdateModal = ({
               name="description"
               placeholder="Description"
               className="w-full border p-2 rounded"
-              value={taskData.description}
+              value={taskData.description || ""}
               onChange={handleChange}
             />
 
             <select
               name="priority"
               className="w-full border p-2 rounded"
-              value={taskData.priority}
+              value={taskData.priority || ""}
               onChange={handleChange}
             >
               <option value="Low">Low</option>
@@ -88,7 +89,7 @@ const CreateUpdateModal = ({
             <select
               name="status"
               className="w-full border p-2 rounded"
-              value={taskData.status}
+              value={taskData.status || ""}
               onChange={handleChange}
             >
               <option value="pending">Pending</option>
@@ -97,7 +98,7 @@ const CreateUpdateModal = ({
             <select
               name="category"
               className="w-full border p-2 rounded"
-              value={taskData.category}
+              value={taskData.category || ""}
               onChange={handleChange}
             >
               <option value="Others">Others</option>

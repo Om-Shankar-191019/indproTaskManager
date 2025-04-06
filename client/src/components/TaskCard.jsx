@@ -1,12 +1,26 @@
 import { FaTrash, FaEdit, FaCheckCircle, FaClock } from "react-icons/fa";
 import { formatDate } from "../utils/utilities";
+import { useState } from "react";
+import CreateUpdateModal from "./CreateUpdateModal";
+import useUpdateTask from "../hooks/useUpdateTask";
 
 const TaskCard = ({ task }) => {
-  const { title, description, dueTime, priority, status, category, updatedAt } =
-    task;
-
+  const {
+    _id,
+    title,
+    description,
+    dueTime,
+    priority,
+    status,
+    category,
+    updatedAt,
+  } = task;
+  const [open, setOpen] = useState(false);
+  const { loading, updateTask } = useUpdateTask();
   const onDelete = () => {};
-  const onUpdate = () => {};
+  const onUpdate = () => {
+    setOpen(true);
+  };
 
   const priorityColor = {
     low: "bg-green-100 text-green-700",
@@ -70,6 +84,21 @@ const TaskCard = ({ task }) => {
           </span>
         </div>
       </div>
+
+      {/* update modal */}
+      {open && (
+        <CreateUpdateModal
+          setOpen={setOpen}
+          purpose={"Update"}
+          modalFunction={updateTask}
+          title={title}
+          description={description}
+          priority={priority}
+          status={status}
+          category={category}
+          _id={_id}
+        />
+      )}
     </div>
   );
 };
