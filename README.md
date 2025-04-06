@@ -7,9 +7,9 @@ A modern and user-friendly Task Manager built using the MERN Stack (MongoDB, Exp
 https://indprotaskmanager.onrender.com
 
 # For testing purpose :
-username : testuser
-email : testuser@xyz.com
-password : testuser@xyz
+    username : testuser
+    email : testuser@xyz.com
+    password : testuser@xyz
 
 # 🛠️ Features
 🔐 Authentication (JWT)
@@ -28,32 +28,32 @@ password : testuser@xyz
 
 # Folder Structure (Clean & Scalable)
 
-📦root
-┣ 📂client # React Frontend
-┃ ┣ 📂components
-┃ ┣ 📂context
-┃ ┣ 📂hooks
-┃ ┣ 📂pages
-┃ ┣ 📜App.jsx
-┃ ┗ 📜main.jsx
-┣ 📂server # Express Backend
-┃ ┣ 📂controllers
-┃ ┣ 📂middlewares
-┃ ┣ 📂models
-┃ ┣ 📂routes
-┃ ┗ 📜server.js
-┣ 📜.env
-┣ 📜README.md
-┗ 📜package.json
+    📦root
+    ┣ 📂client # React Frontend
+    ┃ ┣ 📂components
+    ┃ ┣ 📂context
+    ┃ ┣ 📂hooks
+    ┃ ┣ 📂pages
+    ┃ ┣ 📜App.jsx
+    ┃ ┗ 📜main.jsx
+    ┣ 📂server # Express Backend
+    ┃ ┣ 📂controllers
+    ┃ ┣ 📂middlewares
+    ┃ ┣ 📂models
+    ┃ ┣ 📂routes
+    ┃ ┗ 📜server.js
+    ┣ 📜.env
+    ┣ 📜README.md
+    ┗ 📜package.json
 
 # ⚙️ How to Run Locally
 
-1.  Clone the Repository
+Clone the Repository
 
     git clone https://github.com/Om-Shankar-191019/indproTaskManager.git
     cd indproTaskManager
 
-2.  Install Dependencies
+Install Dependencies
 
 For backend:
 
@@ -65,20 +65,20 @@ For frontend:
     cd ../client
     npm install
 
-3.  Setup Environment Variables
+Setup Environment Variables
    In the indproTaskManager (root) folder, create a .env file:
 
     PORT=5000
     MONGODB_URI=your_mongodb_connection_string
     JWT_SECRET=your_secret_key
 
-4.  Start the App
-
+Start the App
 Start backend in Terminal 1:
-    cd server
-    npm run dev
 
+    cd server 
+    npm run dev
 Start frontend in Terminal 2:
+
     cd ../client
     npm run dev
 
