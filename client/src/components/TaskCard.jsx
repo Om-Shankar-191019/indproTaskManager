@@ -3,6 +3,7 @@ import { formatDate } from "../utils/utilities";
 import { useState } from "react";
 import CreateUpdateModal from "./CreateUpdateModal";
 import useUpdateTask from "../hooks/useUpdateTask";
+import useDeleteTask from "../hooks/useDeleteTask";
 
 const TaskCard = ({ task }) => {
   const {
@@ -17,7 +18,10 @@ const TaskCard = ({ task }) => {
   } = task;
   const [open, setOpen] = useState(false);
   const { loading, updateTask } = useUpdateTask();
-  const onDelete = () => {};
+  const { deleteTask } = useDeleteTask();
+  const onDelete = () => {
+    deleteTask(_id);
+  };
   const onUpdate = () => {
     setOpen(true);
   };

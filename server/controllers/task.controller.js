@@ -71,7 +71,7 @@ export const deleteTask = async (req, res, next) => {
   try {
     const userId = req.user._id;
     await Task.findByIdAndDelete({ _id: req.params.id, user: userId });
-    res.status(204).json({ message: "Task deleted" });
+    res.status(200).json({ message: "Task deleted" });
   } catch (error) {
     next(error);
   }
