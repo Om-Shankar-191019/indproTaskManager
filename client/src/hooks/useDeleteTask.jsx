@@ -27,7 +27,7 @@ const useDeleteTask = () => {
         return updatedTasks;
       });
       setTasks((prev) => {
-        const updatedTasks = prev.map((item) => item._id !== _id);
+        const updatedTasks = prev.filter((item) => item._id !== _id);
         return updatedTasks;
       });
       toast.success("Task Deleted");

@@ -30,9 +30,12 @@ const Header = () => {
     <header className="px-4 sm:px-16 py-6 bg-white ">
       <div className=" flex items-center justify-between">
         <div className="flex items-center">
-          <SiTask className="text-sky-500 text-4xl" />
+          <SiTask className="text-sky-600 text-4xl" />
           <h1 className="text-lg font-medium">
-            Welcome <span className="font-light">{username}</span>
+            Welcome{" "}
+            <span className="font-medium text-xs text-gray-500 ">
+              {username}
+            </span>
           </h1>
         </div>
 
@@ -66,7 +69,7 @@ const Header = () => {
         </nav>
         <div className="hidden md:flex items-center gap-6">
           <div
-            className="flex gap-2 items-center  border-sky-600 px-2 py-1 bg-primary cursor-pointer rounded-md"
+            className="flex gap-2 items-center border-2 font-medium border-sky-600 px-2 py-1 bg-primary cursor-pointer rounded-md"
             onClick={handleLogout}
           >
             <span>Log out</span>
@@ -89,7 +92,7 @@ const Header = () => {
         )}
 
         {showNavLinks && (
-          <nav className="absolute right-4 sm:right-16 top-28 flex md:hidden flex-col-reverse gap-4 shadow-lg rounded-md py-4 pl-4 pr-8 duration-150 bg-primary">
+          <nav className="absolute right-4 sm:right-16 top-28 flex md:hidden flex-col-reverse gap-4 shadow-lg rounded-md py-4 pl-4 pr-8 duration-150 bg-gray-200">
             <div className="flex flex-col gap-2">
               <NavLink
                 to="/"

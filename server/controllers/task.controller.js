@@ -79,3 +79,40 @@ export const deleteTask = async (req, res, next) => {
     next(error);
   }
 };
+
+// summary for task
+export const getTaskSummary = async (req, res, next) => {
+  try {
+    const userId = req.user._id;
+
+    const totalTasks = await Task.countDocuments({ user: userId });
+    const completedTasks = await Task.countDocuments({
+      user: userId,
+      status: "completed",
+    });
+    const pendingTasks = await Task.countDocuments({
+      user: userId,
+      status: "pending",
+    });
+
+    const tasksByPriority = await Task.aggregate([
+      { $match: { user: userId } },
+      { $group: { _id: "$priority", count: { $sum: 1 } } },
+    ]);
+
+    const tasksByCategory = await Task.aggregate([
+      { $match: { user: userId } },
+      { $group: { _id: "$category", count: { $sum: 1 } } },
+    ]);
+
+    res.status(200).json({
+      totalTasks,
+      completedTasks,
+      pendingTasks,
+      tasksByPriority,
+      tasksByCategory,
+    });
+  } catch (error) {
+    next(error);
+  }
+};

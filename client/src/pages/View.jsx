@@ -62,9 +62,9 @@ const View = () => {
         {/* Status Filter */}
         <div className="space-x-2">
           <span className="text-gray-600 font-semibold">Status:</span>
-          {statuses.map((s) => (
+          {statuses.map((s, index) => (
             <button
-              key={s}
+              key={`status-${s}-${index}`}
               onClick={() => handleFilterChange("status", s)}
               className={`px-3 py-1 rounded-full text-sm border ${
                 filters.status === s
@@ -80,9 +80,9 @@ const View = () => {
         {/* Priority Filter */}
         <div className="space-x-2">
           <span className="text-gray-600 font-semibold">Priority:</span>
-          {priorities.map((p) => (
+          {priorities.map((p, index) => (
             <button
-              key={p}
+              key={`prior-${p}-${index}`}
               onClick={() => handleFilterChange("priority", p)}
               className={`px-3 py-1 rounded-full text-sm border ${
                 filters.priority === p
@@ -103,8 +103,8 @@ const View = () => {
             className="border border-gray-300 rounded px-3 py-1 text-sm"
           >
             <option value="">All Categories</option>
-            {categories.map((c) => (
-              <option key={c} value={c}>
+            {categories.map((c, index) => (
+              <option key={`cat-${c}-${index}`} value={c}>
                 {c}
               </option>
             ))}
@@ -125,7 +125,9 @@ const View = () => {
         {loading ? (
           <LoadingSpinner />
         ) : tasks?.length > 0 ? (
-          tasks.map((task) => <TaskCard key={task._id} task={task} />)
+          tasks.map((task, index) => (
+            <TaskCard key={`tas-${task._id}-${index}`} task={task} />
+          ))
         ) : (
           <p className="text-gray-500">No tasks found.</p>
         )}

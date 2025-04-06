@@ -27,9 +27,9 @@ const TaskCard = ({ task }) => {
   };
 
   const priorityColor = {
-    low: "bg-green-100 text-green-700",
-    medium: "bg-yellow-100 text-yellow-700",
-    high: "bg-red-100 text-red-700",
+    Low: "bg-green-100 text-green-700",
+    Medium: "bg-yellow-100 text-yellow-700",
+    High: "bg-red-100 text-red-700",
   };
 
   return (
@@ -75,9 +75,7 @@ const TaskCard = ({ task }) => {
 
         {/* Priority */}
         <span
-          className={`text-xs font-medium px-2 py-1 rounded-full ${
-            priorityColor[priority.toLowerCase()]
-          }`}
+          className={`text-xs font-medium px-2 py-1 rounded-full ${priorityColor[priority]}`}
         >
           {priority}
         </span>
