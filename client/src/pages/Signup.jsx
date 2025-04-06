@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useSignup from "../hooks/useSignup";
 import { SiTask } from "react-icons/si";
+import LoadingSpinner from "../components/LoadingSpinner";
 // import toast from "react-hot-toast";
 
 const Signup = () => {
@@ -141,11 +142,7 @@ const Signup = () => {
                 disabled={loading}
                 className="w-full text-white bg-sky-600 hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-sky-600 dark:hover:bg-sky-500 dark:focus:ring-primary-800 duration-200"
               >
-                {loading ? (
-                  <span className="loading loading-dots loading-md"></span>
-                ) : (
-                  "Sign up"
-                )}
+                {loading ? <LoadingSpinner givenColor={"white"} /> : "Sign up"}
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
