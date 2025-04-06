@@ -26,9 +26,9 @@ const CreateTaskButton = () => {
     setTaskData({
       title: "",
       description: "",
-      priority: "",
-      status: "",
-      category: "",
+      priority: "Low",
+      status: "pending",
+      category: "Others",
     });
   };
 
